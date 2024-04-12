@@ -1,5 +1,7 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-builder.AddProject<Projects.Web>("web");
+var cache = builder.AddRedis("cache");
+
+builder.AddProject<Projects.Web>("web").WithReference(cache);
 
 builder.Build().Run();
